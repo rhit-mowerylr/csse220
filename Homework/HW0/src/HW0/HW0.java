@@ -69,9 +69,13 @@ public class HW0 {
 	public static boolean isProductAMultipleOfFour(int x, int y) {
 		// TODO: Implement this method
 		int product = x * y;
-		int four = product % 4;
-		if four = 0:
-			return true
+		int multiple = product % 4;
+		if (multiple = 0) {
+			return boolean = true
+		} else {
+			return boolean = false
+		}
+
 
 	}
 
