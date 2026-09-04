@@ -5,6 +5,8 @@ package HW0;
  *         REQUIRED HELP CITATION
  * 
  *         TODO: cite your help here or say "only used CSSE220 materials"
+ *         //Only used CSSE220 materials
+ *         //Solved in class with Dr. Luddin
  ****************************************************************************************
  * 
  * <dl> 
@@ -39,9 +41,16 @@ public class HW0 {
 	 * 
 	 * addFraction(1,2,1,4) returns 0.75
 	 */
+
 	public static double addFraction(int num1, int den1, int num2, int den2) {
-		// TODO: Implement this method
-		throw new UnsupportedOperationException("Not yet implemented.");
+		// DONE: Implement this method
+		double first_number=num1;
+		double second_number=num2;
+		double first_fraction = first_number / den1;
+		double second_fraction = second_number / den2;
+		double final_answer = first_fraction + second_fraction;
+		return final_answer;
+		//throw new UnsupportedOperationException("Not yet implemented.");
 	}
 	
 	/**
@@ -59,7 +68,11 @@ public class HW0 {
 	 */
 	public static boolean isProductAMultipleOfFour(int x, int y) {
 		// TODO: Implement this method
-		throw new UnsupportedOperationException("Not yet implemented.");
+		int product = x * y;
+		int four = product % 4;
+		if four = 0:
+			return true
+
 	}
 
 } // end class HW0

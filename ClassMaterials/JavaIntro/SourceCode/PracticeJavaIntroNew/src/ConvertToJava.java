@@ -1,6 +1,6 @@
 /**
- * Template for converting from another language to Java. 
- * 
+ * Template for converting from another language to Java.
+ *
  * @author Ian Ludden
  */
 public class ConvertToJava {
@@ -13,9 +13,19 @@ public class ConvertToJava {
         // or, if you want to return and print some value:
         // [datatype] result = myFunction([arguments]);
         // System.out.println(result);
-    }
 
-    // TODO: Add your converted function here. 
+        double pi = 3.1415926;
+        double triple_pi = pi * pi * pi;
+        System.out.println(triple_pi);
+
+    }
+    // DONE: Add your converted function here.
+
+    //def ThreeSlicesOfPie:
+    // pi=3.1415926
+    // triple_pi=pi*pi*pi
+    // print(triple_pi
+
 
     // === EXAMPLE ===
     // Python version: 
