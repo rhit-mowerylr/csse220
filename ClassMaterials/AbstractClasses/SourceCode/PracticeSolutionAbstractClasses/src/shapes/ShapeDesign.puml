@@ -1,0 +1,56 @@
+@startuml
+class Circle {
+- double radius
++ double calcArea()
++ double calcPerimeter()
++ String toString()
+}
+
+abstract class AbstractShape {
++ {abstract}double calcArea()
++ {abstract}double calcPerimeter()
++ double calcSemiPerimeter()
++ boolean hasLargerArea(AbstractShape)
+}
+
+interface Shape {
+~ double getArea()
+~ double getPerimeter()
+~ double calcSemiPerimeter()
+~ boolean hasLargerArea(AbstractShape)
+}
+
+class ShapeDemo {
++ {static} void main(String[])
++ {static} double totalArea(AbstractShape[])
++ {static} double totalSemiperimeter(AbstractShape[])
++ {static} AbstractShape findLargestArea(AbstractShape[])
++ {static} void printAll(AbstractShape[])
+}
+
+class Rectangle {
+- double length
+- double width
++ double calcArea()
++ double calcPerimeter()
++ String toString()
++ double getLength()
++ double getWidth()
+}
+
+
+class Square {
++ String toString()
+}
+
+
+
+AbstractShape <|-- Circle
+AbstractShape <|-- Rectangle
+Rectangle <|-- Square
+
+ShapeDemo ..> AbstractShape
+ShapeDemo ..> Rectangle
+ShapeDemo ..> Circle
+ShapeDemo ..> Square
+@enduml

@@ -1,0 +1,103 @@
+@startuml
+class ChessBoard {
+- boolean isWhitesTurn
++ void setBoard(BoardLayoutProvider)
++ {static} IntPoint getBoxFromCoordinates(IntPoint)
++ {static} IntPoint getCoordinatesFromBox(IntPoint)
++ void paintComponent(Graphics)
++ ChessPiece getPiece(IntPoint)
++ void handleMove(ChessPiece,IntPoint)
+- void makeMove(ChessPiece,IntPoint)
+- boolean piecesInPath(IntPoint,IntPoint)
++ Dimension getMinimumSize()
+}
+
+
+class Queen {
++ boolean checkMove(int,int)
+}
+
+abstract class ChessPiece {
+- boolean isWhite
+# boolean canJumpPieces
+- String name
++ {abstract}boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+
+class Knight {
++ boolean checkMove(int,int)
+}
+
+interface BoardLayoutProvider {
+~ ChessPiece[][] GetBoard()
+~ boolean isWhitesTurn()
+}
+
+class StandardBoardProvider {
++ ChessPiece[][] GetBoard()
++ boolean isWhitesTurn()
+}
+
+class Rook {
++ boolean checkMove(int,int)
+}
+
+class King {
++ boolean checkMove(int,int)
+}
+
+class Bishop {
++ boolean checkMove(int,int)
+}
+
+class Pawn {
+- boolean hasMoved
+- boolean movedCorrectDirection(int)
++ boolean checkMove(int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ void setHasMovedTrue()
+}
+
+
+class ChessListener {
++ void mouseClicked(MouseEvent)
++ void mouseEntered(MouseEvent)
++ void mouseExited(MouseEvent)
++ void mousePressed(MouseEvent)
++ void mouseReleased(MouseEvent)
+}
+
+
+class ChessMain {
++ {static} void main(String[])
+}
+
+
+class IntPoint {
+- int x
+- int y
++ int getX()
++ int getY()
+}
+
+ChessMain .down.> ChessBoard
+ChessMain .left.> StandardBoardProvider
+ChessBoard .left.> BoardLayoutProvider
+ChessBoard -down-> IntPoint
+ChessBoard -left-> ChessListener
+ChessBoard ->"*" ChessPiece
+ChessListener -> ChessBoard
+
+ChessPiece <|-- Queen
+ChessPiece <|-- Knight
+BoardLayoutProvider <|.. StandardBoardProvider
+ChessPiece <|-- Rook
+ChessPiece <|-- King
+ChessPiece <|-- Bishop
+ChessPiece <|-- Pawn
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+skinparam style strictuml
+
+class BankAccount {
+-balance
++BankAccount()
++BankAccount(initialBalance)
++deposit(amount)
++withdraw(amount)
++getBalance()
++transfer(amount, otherBankAccount)
+}
+
+class SavingsAccount  {
+-interestRate
++SavingsAccount(rate)
++addInterest()
+}
+
+class CheckingAccount {
+-FREE_TRANSACTIONS
+-TRANSACTION_FEE
+-transactionCount
++CheckingAccount(initialBalance)
++deposit(amount)
++withdraw(amount)
++deductFees()
+}
+
+'SavingsAccount is-a BankAccount
+SavingsAccount -up-|> BankAccount
+'CheckingAccount is-a BankAccount
+CheckingAccount -up-|> BankAccount
+@enduml

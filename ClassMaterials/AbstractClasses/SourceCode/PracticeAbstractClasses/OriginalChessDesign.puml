@@ -1,0 +1,132 @@
+@startuml
+'skinparam style strictuml
+'Uncomment the above line to hide icons
+
+'Note: some dependency arrows are omitted,
+'like from BoardLayoutProvider to ChessPiece.
+
+class StandardBoardProvider {
++ ChessPiece[][] GetBoard()
++ boolean isWhitesTurn()
+}
+
+interface BoardLayoutProvider {
+~ ChessPiece[][] GetBoard()
+~ boolean isWhitesTurn()
+}
+
+class IntPoint {
+- int x
+- int y
++ int getX()
++ int getY()
+}
+
+
+class ChessListener {
++ void mouseClicked(MouseEvent)
++ void mouseEntered(MouseEvent)
++ void mouseExited(MouseEvent)
++ void mousePressed(MouseEvent)
++ void mouseReleased(MouseEvent)
+}
+
+
+class ChessBoard {
+- boolean isWhitesTurn
++ void setBoard(BoardLayoutProvider)
++ {static} IntPoint getBoxFromCoordinates(IntPoint)
++ {static} IntPoint getCoordinatesFromBox(IntPoint)
++ void paintComponent(Graphics)
++ ChessPiece getPiece(IntPoint)
++ void handleMove(ChessPiece,IntPoint)
+- void makeMove(ChessPiece,IntPoint)
+- boolean piecesInPath(IntPoint,IntPoint)
++ Dimension getMinimumSize()
+}
+
+
+class ChessMain {
++ {static} void main(String[])
+}
+
+
+class King {
+- boolean isWhite
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+class Queen {
+- boolean isWhite
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+class Bishop {
+- boolean isWhite
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+class Rook {
+- boolean isWhite
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+class Knight {
+- boolean isWhite
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+class Pawn {
+- boolean isWhite
+- boolean hasMoved
++ boolean checkMove(int,int)
++ void draw(Graphics2D,int,int,int)
++ boolean checkAttack(int,int,ChessPiece)
++ boolean isWhite()
++ boolean canJumpPieces()
+}
+
+interface ChessPiece {
+~ boolean checkMove(int,int)
+~ void draw(Graphics2D,int,int,int)
+~ boolean checkAttack(int,int,ChessPiece)
+~ boolean isWhite()
+~ boolean canJumpPieces()
+}
+
+
+ChessMain .down.> ChessBoard
+ChessMain .left.> StandardBoardProvider
+ChessBoard .left.> BoardLayoutProvider
+ChessBoard -down-> IntPoint
+ChessBoard -left-> ChessListener
+StandardBoardProvider ..|> BoardLayoutProvider
+ChessPiece <|.. King
+ChessPiece <|.. Queen
+ChessPiece <|.. Bishop
+ChessPiece <|.. Rook
+ChessPiece <|.. Knight
+ChessPiece <|.. Pawn
+ChessBoard ->"*" ChessPiece
+ChessListener -> ChessBoard
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+'skinparam style strictuml
+
+interface Drivable {
+turn(dir: double): void
+accelerate(force: double): void
+}
+
+class Car {
++turn(dir: double): void
++accelerate(force: double): void
+}
+
+class Truck {
++turn(dir: double): void
++accelerate(force: double): void
+}
+
+class Hovercraft {
++turn(dir: double): void
++accelerate(force: double): void
+}
+
+'To show ClassA implements ClassB,
+'use the PlantUML notation
+'ClassA ..|> ClassB
+
+Car .up.|> Drivable
+Truck .up.|> Drivable
+Hovercraft .up.|> Drivable
+
+@enduml

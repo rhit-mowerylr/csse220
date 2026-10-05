@@ -1,0 +1,22 @@
+@startuml
+skinparam style strictuml
+
+class BankAccount {
+	balance
+	BankAccount()
+	BankAccount(initialBalance)
+	deposit(amount)
+	withdraw(amount)
+	getBalance()
+	transfer(amount, otherBankAccount)
+}
+
+class SavingsAccount  {
+	interestRate
+	SavingsAccount(rate)
+	addInterest()
+}
+
+'Read: SavingsAccount is-a BankAccount
+SavingsAccount -up-|> BankAccount
+@enduml
