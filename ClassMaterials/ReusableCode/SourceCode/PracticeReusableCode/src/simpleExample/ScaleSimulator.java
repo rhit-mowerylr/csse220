@@ -1,5 +1,6 @@
 package simpleExample;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 
@@ -15,12 +16,14 @@ public class ScaleSimulator {
 	private ArrayList<Ball> balls;
 	private ArrayList<Cube> cubes;
 	private ArrayList<Cylinder> cylinders;
+	private ArrayList<Weighable> solids;
 
 
 	public ScaleSimulator() {
 		balls = new ArrayList<Ball>();
 		cubes = new ArrayList<Cube>();
 		cylinders = new ArrayList<Cylinder>();
+		solids = new ArrayList<Weighable>();
 	}
 	
 	private void initializeArrays() {
@@ -32,7 +35,27 @@ public class ScaleSimulator {
 			cubes.add( new Cube(i) );
 			cylinders.add( new Cylinder(i, i) );
 		}
+		solids.addAll(balls);
+		solids.addAll(cubes);
+		solids.addAll(cylinders);
 		
+	}
+
+	private void reportsSolidComparison(ArrayList<Weighable> solids){
+		if (solids.isEmpty()){
+			return;
+		}
+		Weighable heaviest = solids.get(0);
+		for (Weighable s: solids){
+			if (s.calculateWeightInLbs() > heaviest.calculateWeightInLbs()){
+				System.out.println( s + " is heavier than" + heaviest);
+				heaviest =s;
+			} else if (s.calculateWeightInLbs() < heaviest.calculateWeightInLbs()){
+				System.out.println( s + " is less than" + heaviest);
+			} else {
+				System.out.println( s + " is the same weight as" + heaviest);
+			}
+		}
 	}
 
 	private void reportBallComparison(ArrayList<Ball> balls) {
@@ -97,6 +120,9 @@ public class ScaleSimulator {
 
 		System.out.println("---------------------------------------");
 		this.reportCylinderComparison(cylinders);
+
+		System.out.println("---------------------------------------");
+		this.reportsSolidComparison(solids);
 	}
 	
 

@@ -21,6 +21,30 @@ public class AddLettersViewer {
 		JFrame frame = new JFrame();
 
 		// put your new JButtons, JLabels, etc here
+
+		JLabel textOutput = new JLabel("> ");
+		JButton a = new JButton("Add A");
+		JButton b = new JButton("Add B");
+		JButton c = new JButton("Add C");
+
+
+		JPanel panel = new JPanel();
+		panel.add(a, BorderLayout.WEST);
+		panel.add(b);
+		panel.add(c, BorderLayout.EAST);
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(a);
+		buttonPanel.add(b);
+		buttonPanel.add(c);
+		panel.add(buttonPanel);
+
+		a.addActionListener(new AddListener(textOutput, "A"));
+		b.addActionListener(new AddListener(textOutput, "B"));
+		c.addActionListener(new AddListener(textOutput, "C"));
+
+		frame.add(textOutput, BorderLayout.CENTER);
+		frame.add(panel, BorderLayout.SOUTH);
 		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

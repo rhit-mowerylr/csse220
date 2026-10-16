@@ -1,31 +1,107 @@
 package salesManager;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
- * TODO: Add class-level description here.
- * 
+ * DONE: Add class-level description here.
+ * This Class will handle commands that to do with Games, such as making new Games
+ *  * selling Games, and finding information within the Games. It can even put Games into bundles.
  *************************************************************************************** 
  * REQUIRED HELP CITATION
  * 
- * TODO: cite your help here or say "only used CSSE220 materials"
+ * DONE: cite your help here or say "only used CSSE220 materials"
+ * only used CSSE220 materials;
  *************************************************************************************** 
- * TODO: List each team member's name and email username here. 
- * @author First Student - studenfi
- * @author Second Student - studense
+ * DONE: List each team member's name and email username here.
+ * @author First Student - Luke Mowery    mowerylr
+ *  * @author Second Student - Will Gebelein    gebeleinwj
  *************************************************************************************** 
  */
 public class Game {
-	// TODO: Complete this class by adding fields, constructors, and methods here.
+	// DONE: Complete this class by adding fields, constructors, and methods here.
 	// Adhere to (1), (2), and (3) below.
 	
 	// HINT: See the static methods `doubleToDollars` and `listToCommaSeparatedString` 
 	// in SalesManager.java. Using these methods will save you time when formatting 
-	// the sales report. 
+	// the sales report.
+
+	String title; //title of the game
+	String rating; //age rating of the game
+	double price; //overall price of the game
+	ArrayList<Bundle> chosenBundle= new ArrayList<>(); //any bundle that the game is in
+	int numCopiesGameSold =0; //number of times the game was sold
+	int numCopiesBundleSold =0; //number of times the bundle that had the game was sold
+	double bundle_revenue; //total amount of money from the bundles
 
 	public Game() {
 	} // Keep this constructor for unit tests
 
-	public Game(String title) {
-		// TODO Modify this constructor as needed
+	public Game(String title, String rating, double price) {
+		// DONE Modify this constructor as needed
+		this.title = title;
+		this.rating = rating;
+		this.price = price;
+	}
+
+	public void sellCopysingle(){
+		this.numCopiesGameSold++;
+	} //sells a single version of the game
+
+	public void sellCopybundles(Bundle b){ //sells a bundle that has the game
+		this.numCopiesBundleSold++;
+		this.bundle_revenue+=b.getPrice()/b.getGames().length;
+	}
+
+	public double computeTotalRevenue(){
+		return this.price*(this.numCopiesGameSold)+this.bundle_revenue;
+	}
+
+	public String handlePrintSalesReport(){ //prints out the game title, rating, price, copies sold both individually
+		// and bundles, and total revenue of the game
+		return "Title: "+this.title+"\nRating: "+this.rating+"\nPrice: "
+				+SalesManagerMain.doubleToDollars(this.price)+
+				"\nCopies Sold Individually: "+this.numCopiesGameSold+"\nCopies Sold in Bundles: "
+				+this.numCopiesBundleSold+"\nTotal Copies Sold: "
+				+(this.numCopiesBundleSold+this.numCopiesGameSold)+
+				"\nTotal Revenue: "+SalesManagerMain.doubleToDollars(computeTotalRevenue());
+	}
+	public void addBundle(Bundle newBundle){ //create a new bundle with the game
+		boolean temp =false;
+		for (int i=0; i<newBundle.getGames().length; i++){
+			if(Objects.equals(newBundle.getGames()[i], this.title)){
+				temp=true;
+			}
+		}
+
+		if(!temp){
+			newBundle.addGame(this);
+		}
+		chosenBundle.add(newBundle);
+	}
+
+	public double getPrice(){
+		return this.price;
+	}
+
+	public int getCopiesSold(){
+		return this.numCopiesGameSold;
+
+	}
+
+	public ArrayList<Bundle> getBundles(){
+		return this.chosenBundle;
+	}
+
+
+	public String getTitle(){
+		return this.title;
+	}
+	public String toString(){
+		return "Title: "+this.title+"\nRating: "+this.rating+"\nPrice: "
+				+SalesManagerMain.doubleToDollars(this.price)+
+				"\nCopies Sold Individually: "+this.numCopiesGameSold+"\nCopies Sold in Bundles: "
+				+this.numCopiesBundleSold;
 	}
 
 	// (1) Requirements on Field Declaration Design/Engineering:

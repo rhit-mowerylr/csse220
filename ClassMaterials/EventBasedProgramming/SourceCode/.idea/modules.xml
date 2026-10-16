@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PracticeEventBasedProgramming/PracticeEventBasedProgramming.iml" filepath="$PROJECT_DIR$/PracticeEventBasedProgramming/PracticeEventBasedProgramming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PracticeEventBasedProgrammingSolution/PracticeEventBasedProgrammingSolution.iml" filepath="$PROJECT_DIR$/PracticeEventBasedProgrammingSolution/PracticeEventBasedProgrammingSolution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SourceCode.iml" filepath="$PROJECT_DIR$/.idea/SourceCode.iml" />
+    </modules>
+  </component>
+</project>

@@ -2,18 +2,22 @@ Reflection Questions:
 
 1.A In your implementation could you replace each Question class with just a Java String (yes or no)? 
 
+No
 
 1.B Explain why or why not (2-3 sentences)
 
-
+While physically possible, it provides a lot more work, and for bigger quizzes, there too many questions to go through.
+By having a Question class, we can change all the questions with the specific id in every quiz without needing
+ to change each quiz individually.
 
 2.A. What data type did you use to represent the 1-to-many relationship between QuizMain and Question? (provide the type declaration)
-
+Hashmaps, because  we have many questions and quizzes with many ids, Hashmaps helps organize everything, by id and quiz/question.
 
 2.B. What is another data type you could have used? (provide the type declaration) 
-
+Arraylist, because it could store all the questions within a quiz.
 
 
 2.C. Would that have made your implementation easier or harder to implement? Explain why (2-3 sentences)
-
+Maybe harder, because each question and quiz needs a specific id.
+We would have to write more arraylists then Hashmaps to solve this problem.
 

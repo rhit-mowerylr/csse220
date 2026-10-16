@@ -9,14 +9,18 @@ class SkyMain {
 class Constellation {
   name
   lines
-  starPositions
-  starColors
-  starSizes
   loadFile(filename)
   drawConstellation(graphics)
   drawLines(graphics)
-  drawStar(graphics, position, color, size)
+}
+
+class Star {
+  starPositions
+  starColors
+  starSizes
+  drawStar(graphics)
 }
 
 SkyMain ->"*" Constellation
+Constellation ->"*" Star
 @enduml

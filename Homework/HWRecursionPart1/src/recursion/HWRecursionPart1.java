@@ -17,7 +17,11 @@ public class HWRecursionPart1 {
 	 * 
 	 */
 	public static int summation(int value) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if (value <= 1) {
+			return 1;
+		}
+		int new_value= value-1;
+		return value + summation(new_value);
 	} // summation
 
 	/**
@@ -26,30 +30,52 @@ public class HWRecursionPart1 {
 	 * requires: |inputList| >= 0
 	 */
 	public static int arrayListSummation(ArrayList<Integer> inputList) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if (inputList.size() <= 1) {
+			return 1;
+		}
+		int one_less = inputList.remove(inputList.size()-1);
+		return one_less + arrayListSummation(inputList);
+
 	} // arrayListSummation
 
 	/**
 	 * Returns the number of threes in the prime factorization of the input value.
 	 */
 	public static int countNumberOf3sInPrimeFactorization(int inputNumber) {
-		throw new UnsupportedOperationException("Not yet implemented");
+
+		if (inputNumber==0){
+			return 0;
+		} else if (inputNumber%3 !=0) {
+			return 0;
+		} else {
+			return 1 + countNumberOf3sInPrimeFactorization(inputNumber / 3);
+		}
 	} // countNumberOf3sInPrimeFactorization
 
 	/**
 	 * Determine if a value is an even power of three (3^2, 3^4, 3^6).
 	 * <br>
 	 * You can assume the input value is a power of three.
+	 *
 	 */
 	public static boolean evenPowerOfThree(int inputValue) {
-		throw new UnsupportedOperationException("Not yet implemented");
+
+		if (inputValue==1){
+			return true;
+		}
+		return !evenPowerOfThree(inputValue/3);
 	} // evenPowerOfThree
 
 	/**
 	 * Determine if there are no doubled letters in a String.
 	 */
 	public static boolean noDoubledLetters(String inputString) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if (inputString.charAt(0) == inputString.charAt(1)) {
+			return false;
+		} else if (inputString.length()==2) {
+			return true;
+		}
+		return noDoubledLetters(inputString.substring(1));
 	} // noDoubledLetters
 
 	/**
@@ -62,7 +88,25 @@ public class HWRecursionPart1 {
 	 * staring number.
 	 */
 	public static boolean numbersGame(int startingNumber) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if ( startingNumber <=0) {
+			return false;
+		} else if (startingNumber==1){
+			return true;
+		}
+
+		if (startingNumber%3==0){
+			boolean a= numbersGame(startingNumber/3);
+			boolean b= numbersGame(startingNumber-7);
+			if (a || b){
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return numbersGame(startingNumber-7);
+		}
+
+
 	} // numbersGame
 	
 } // end HWRecursionPart1

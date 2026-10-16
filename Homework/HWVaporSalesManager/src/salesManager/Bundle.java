@@ -1,30 +1,107 @@
 package salesManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
- * TODO: Add class-level description here.
+ * DONE: Add class-level description here.
+ * This Class will handle commands that to do with Bundles, such as making new Bundles
+ * selling Bundles, and finding information within the bundle.
  * 
  *************************************************************************************** 
  * REQUIRED HELP CITATION
  * 
- * TODO: cite your help here or say "only used CSSE220 materials"
+ * DONE: cite your help here or say "only used CSSE220 materials"
+ * only used CSSE220 materials;
  *************************************************************************************** 
- * TODO: List each team member's name and email username here. 
- * @author First Student - studenfi
- * @author Second Student - studense
+ * DONE: List each team member's name and email username here.
+ * @author First Student - Luke Mowery    mowerylr
+ *  * @author Second Student - Will Gebelein    gebeleinwj
  *************************************************************************************** 
  */
 public class Bundle {
-	// TODO: Complete this class by adding fields, constructors, and methods here.
+	// DONE: Complete this class by adding fields, constructors, and methods here.
 	// Adhere to (1), (2), and (3) below.
 	
 	// HINT: See the static methods `doubleToDollars` and `listToCommaSeparatedString` 
 	// in SalesManager.java. Using these methods will save you time when formatting 
-	// the sales report. 
+	// the sales report.
+	String name;  //name of the bundle
+	double price; // overall price of the bundle
+	ArrayList<Game> game =new ArrayList<Game>(); //The list of games inside the bundle
+	int numCopiesSold = 0; //number of copies of the bundle sold
 	
 	public Bundle() {} // Keep this constructor for unit tests
 	
-	public Bundle(String name) {
-		// TODO Modify this constructor as needed.   
+	public Bundle(String name, double price, ArrayList<Game> game) {
+		// DONE Modify this constructor as needed.
+		// This code adds the name, price, games, and copies sold of this particular bundle;
+		this.name =name;
+		this.price =price;
+		this.game =game;
+		this.numCopiesSold = 0;
+
+	}
+
+	public void sellCopy(){ //When a copy of the bundle is sold, it will be recorded to the overall program
+		this.numCopiesSold++;
+		int length=this.game.toArray().length;
+		for(int i=0; i<length; i++){
+			game.get(i).sellCopybundles(this);
+		}
+
+	}
+
+	public double computeRevenuePerGame(){
+		return price*numCopiesSold;
+	}
+	//How much money was made by the number of copies of this particular bundle
+
+	public String handlePrintSalesReport(){
+		//Prints out the bundle name, games in the bundle, overall price, copies sold, and total revenue
+		String One =game.get(0).getTitle();
+		for (int i =1; i<game.toArray().length; i++){
+			One=One+","+game.get(i).getTitle();
+		}
+		return "Name: "+this.name+"\nGames: "+ One +"\nPrice: "+SalesManagerMain.doubleToDollars(this.price)
+				+"\nCopies Sold: " +this.numCopiesSold+
+				"\nTotal Revenue: "+SalesManagerMain.doubleToDollars(computeRevenuePerGame());
+	}
+	public String toString(){
+		//Converts a statement to a string
+		return "Name: "+this.name+"\nGames: "+ Arrays.toString(game.toArray()) +"\nPrice: "+SalesManagerMain.doubleToDollars(this.price)
+				+"\nCopies Sold: " +this.numCopiesSold;
+	}
+
+	public void addGame(Game g){
+		this.game.add(g);
+	}  //adds a game to a bundle
+
+	public void removeGame(Game g){
+		this.game.remove(g);
+	} //removes a game to a bundle
+
+	public void changePrice(double p){
+		this.price = p;
+	} //changes the overall price of a bundle
+	public String getName(){
+		return this.name;
+	}
+	public double getPrice(){
+		return this.price;
+	}
+
+	public int getCopiesSold(){
+		return this.numCopiesSold;
+	}
+
+	public String[] getGames(){ //show the titles of the games within the array
+		int length= (this.game.toArray().length);
+		String[] titles= new String[length];
+		for (int i=0; i<length; i++){
+			titles[i] = game.get(i).getTitle();
+		}
+		return titles;
 	}
 
 	// (1) Requirements on Field Declaration Design/Engineering:

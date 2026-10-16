@@ -20,16 +20,17 @@ import java.util.Scanner;
  *************************************************************************************** 
  * REQUIRED HELP CITATION
  * 
- * TODO: cite your help here or say "only used CSSE220 materials"
+ * DONE: cite your help here or say "only used CSSE220 materials"
+ * Used CSSE220 materials and ChatGTP for AI part
  *************************************************************************************** 
- * TODO: List each team member's name and email username here. 
- * @author First Student - studenfi
- * @author Second Student - studense
+ * DONE: List each team member's name and email username here.
+ * @author First Student - Luke Mowery    mowerylr
+ * @author Second Student - Will Gebelein    gebeleinwj
  *************************************************************************************** 
  */
 
 public class SalesManagerMain {
-	// TODO: Feel free to add any constants here as static fields
+	// DONE: Feel free to add any constants here as static fields
 
 	private ArrayList<Game> games;
 	private ArrayList<Bundle> bundles;
@@ -42,31 +43,29 @@ public class SalesManagerMain {
 		this.bundles = new ArrayList<Bundle>();
 	}
 
-	 /* TODO: You may notice that in several methods, 
+	 /* DONE: You may notice that in several methods,
 	 you need to retrieve a Game object given its title, or 
 	 a Bundle object given its name. 
 	 Therefore, you may want to use these private methods: */
 
 	private Game getGameGivenTitle(String gameTitle) {
-		return null;
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// for (Game game : this.games) {
-		// 	if (gameTitle.equals(game.getTitle())) {
-		// 		return game;
-		// 	}
-		// }
-		// return null;
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 for (Game game : this.games) {
+		 	if (gameTitle.equals(game.getTitle())) {
+		 		return game;
+		 	}
+		 }
+		 return null;
 	}
 
 	private Bundle getBundleGivenName(String bundleName) {
-		return null;
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// for (Bundle bundle : this.bundles) {
-		// 	if (bundleName.equals(bundle.getName())) {
-		// 		return bundle;
-		// 	}
-		// }
-		// return null;
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 for (Bundle bundle : this.bundles) {
+		 	if (bundleName.equals(bundle.getName())) {
+		 		return bundle;
+		 	}
+		 }
+		 return null;
 	}
 
 	/**
@@ -80,11 +79,10 @@ public class SalesManagerMain {
 	 * @return "ok" if successful
 	 */
 	private String handleAddGame(String gameTitle, String gameRating, double gamePrice) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// Game newGame = new Game(gameTitle, gameRating, gamePrice);
-		// this.games.add(newGame);
-		// return "ok";
+		// DONe: When you are ready, uncomment the following code and delete the return statement above
+		 Game newGame = new Game(gameTitle, gameRating, gamePrice);
+		 this.games.add(newGame);
+		 return "ok";
 	}
 
 	/**
@@ -98,23 +96,28 @@ public class SalesManagerMain {
 	 * @return "ok" if successful
 	 */
 	private String handleAddBundle(String bundleName, double bundlePrice, ArrayList<String> gameTitles) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// ArrayList<Game> games = new ArrayList<Game>();
-		// for (String gameTitle : gameTitles) {
-		// 	Game game = this.getGameGivenTitle(gameTitle);
-		// 	// TODO (GenAI part): Create a new Game object if the given title does not yet exist
-		// 	games.add(game);
-		// }
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 ArrayList<Game> games = new ArrayList<Game>();
+		ArrayList<Game> Newgame = new ArrayList<Game>();
+		 for (String gameTitle : gameTitles) {
+		 	Game game = this.getGameGivenTitle(gameTitle);
+		// 	// DONE (GenAI part): Create a new Game object if the given title does not yet exist
+			 if (game == null) {
+				 game = new Game(gameTitle, "T", 49.95);
+				 this.games.add(game);
+			 }
+			 games.add(game);
+			 Newgame.add(game);
+		 }
 
-		// Bundle newBundle = new Bundle(bundleName, bundlePrice, games);
-		// this.bundles.add(newBundle);
+		 Bundle newBundle = new Bundle(bundleName, bundlePrice, Newgame);
+		 this.bundles.add(newBundle);
 
-		// for (Game game : games) {
-		// 	game.addBundle(newBundle);
-		// }
+		 for (Game game : games) {
+		 	game.addBundle(newBundle);
+		 }
 		
-		// return "ok";
+		 return "ok";
 	}
 
 	/**
@@ -125,15 +128,14 @@ public class SalesManagerMain {
 	 * @return "ok" if successful, "game not found" if unsuccessful
 	 */
 	private String handleSellGame(String gameTitle) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// Game game = this.getGameGivenTitle(gameTitle);
-		// if (game != null) {
-		// 	game.sellCopy();
-		// 	return "ok";
-		// }
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		Game game = this.getGameGivenTitle(gameTitle);
+		 if (game != null) {
+		 	game.sellCopysingle();
+		 	return "ok";
+		 }
 		
-		// return "game not found";
+		 return "game not found";
 	}
 
 	/**
@@ -143,15 +145,14 @@ public class SalesManagerMain {
 	 * @return "ok" if successful, "bundle not found" if unsuccessful
 	 */
 	private String handleSellBundle(String bundleName) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// Bundle bundle = this.getBundleGivenName(bundleName);
-		// if (bundle != null) {
-		// 	bundle.sellCopy();
-		// 	return "ok";
-		// }
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 Bundle bundle = this.getBundleGivenName(bundleName);
+		 if (bundle != null) {
+		 	bundle.sellCopy();
+		 	return "ok";
+		 }
 
-		// return "bundle not found";
+		return "bundle not found";
 	}
 
 	/**
@@ -162,14 +163,13 @@ public class SalesManagerMain {
 	 * @return String representation of game sales report
 	 */
 	private String handlePrintGameSalesReport(String gameTitle) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// Game game = this.getGameGivenTitle(gameTitle);
-		// if (game != null) {
-		// 	return game.printSalesReport();
-		// }
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 Game game = this.getGameGivenTitle(gameTitle);
+		 if (game != null) {
+		 	return game.handlePrintSalesReport();
+		 }
 
-		// return "game not found";
+		 return "game not found";
 	}
 
 	/**
@@ -180,14 +180,13 @@ public class SalesManagerMain {
 	 * @return String representation of bundle sales report
 	 */
 	private String handlePrintBundleSalesReport(String bundleName) {
-		return "not yet implemented";
-		// TODO: When you are ready, uncomment the following code and delete the return statement above
-		// Bundle bundle = this.getBundleGivenName(bundleName);
-		// if (bundle != null) {
-		// 	return bundle.printSalesReport();
-		// }
+		// DONE: When you are ready, uncomment the following code and delete the return statement above
+		 Bundle bundle = this.getBundleGivenName(bundleName);
+		 if (bundle != null) {
+		 	return bundle.handlePrintSalesReport();
+		 }
 
-		// return "bundle not found";
+		 return "bundle not found";
 	}
 
 	/**
@@ -199,8 +198,16 @@ public class SalesManagerMain {
 	 * @return String name of the best-selling bundle
 	 */
 	private String handleGetBestSellingBundle() {
-		// TODO (GenAI part) Your code here
-		return null;
+		// DONE (GenAI part) Your code here
+		Bundle bestBundle = null;
+
+		for (Bundle bundle : this.bundles) {
+			if (bestBundle == null || bundle.getCopiesSold() > bestBundle.getCopiesSold()) {
+				bestBundle = bundle;
+			}
+		}
+
+		return bestBundle.getName();
 	}
 
 	/**
@@ -218,8 +225,21 @@ public class SalesManagerMain {
 	 * @return String title of the game with the highest revenue
 	 */
 	private String handleGetHighestRevenueGame() {
-		// TODO (GenAI part) Your code here
-		return null;
+		// DONE (GenAI part) Your code here
+		Game highestRevenueGame = null;
+		double highestRevenue = -1;
+
+		for (Game game : this.games) {
+			// Revenue from individual game sales
+			double revenue = game.computeTotalRevenue();
+
+			if (revenue > highestRevenue) {
+				highestRevenue = revenue;
+				highestRevenueGame = game;
+			}
+		}
+
+		return highestRevenueGame.getTitle();
 	}
 
 	/**

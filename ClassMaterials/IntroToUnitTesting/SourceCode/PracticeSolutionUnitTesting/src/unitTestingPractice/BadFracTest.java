@@ -21,7 +21,11 @@ public class BadFracTest {
 		assertTrue(tester2.isReduced());
 		assertFalse(tester3.isReduced());
 		assertTrue(tester4.isReduced());
-		
+		BadFrac frac1 =new BadFrac( 2,5);
+		assertTrue(frac1.isReduced());
+		BadFrac frac2 =new BadFrac( 2,4);
+		assertFalse(frac2.isReduced());
+		assertFalse(tester5.isReduced());
 		
 	}
 	
@@ -31,6 +35,13 @@ public class BadFracTest {
 		BadFrac res = tester1.add(tester2);
 		assertEquals(3, res.getNum());
 		assertEquals(4, res.getDen());
+		BadFrac newres= tester3.add(tester4);
+		assertEquals(1, newres.getNum());
+		assertEquals(2, newres.getDen());
+		BadFrac zerores= tester4.add(tester5);
+		assertEquals(0, zerores.getNum());
+		assertEquals(1, zerores.getDen());
+
 	}
 	
 	
