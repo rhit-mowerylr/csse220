@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -50,16 +51,23 @@ public class FileAverage {
 		//TODO: Run to see one exception. Trace the code to understand. 
 		// Then change to nums.txt to see the other exception. 
 		
-//		String inputFile = "nums_wrongname.txt"; 
+//		String inputFile = "nums_wrongname.txt";
 		String inputFile = "nums.txt";
-		try {
-			double average = computeAverageForFile(inputFile);
-			System.out.println("Average: " + average);
-		} catch(FileNotFoundException e) {
-			System.err.println("File " + inputFile + " not found.  Exiting.");
-		} catch(IOException e) {
-			System.err.println("Error closing file.");
-		} // end try-catch	
+		boolean isSuccess =true;
+		while (isSuccess) {
+			try {
+				double average = computeAverageForFile(inputFile);
+				isSuccess = false;
+				System.out.println("Average: " + average);
+			} catch (FileNotFoundException e) {
+				System.err.println("File " + inputFile + " not found.  Exiting.");
+				JFileChooser chooser=new JFileChooser(System.getProperty("user.dir"));
+				chooser.showDialog(null, "Select file");
+				inputFile = chooser.getSelectedFile().getName();
+			} catch (IOException e) {
+				System.err.println("Error closing file.");
+			} // end try-catch
+		}//end while loop
 	} // runApp
 	
 	//-------------------------------------------------------------------------------

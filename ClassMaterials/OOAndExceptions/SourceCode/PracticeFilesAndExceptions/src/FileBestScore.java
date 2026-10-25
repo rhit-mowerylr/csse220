@@ -1,3 +1,6 @@
+import basicSolution.TooManyScoresException;
+
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,9 +40,13 @@ public class FileBestScore {
 
 	private int computeTotal(String allScoresString) {
 		String[] allScoresArray = allScoresString.split(",");
+		if(allScoresArray.length>4){
+			throw new TooManyScoresException(allScoresArray.length, 4);
+		}
 		int total = 0;
 		for(String score : allScoresArray) {
 			total += Integer.parseInt(score.trim());
+
 		} // end for
 		return total;
 	} // computeTotal
@@ -55,11 +62,15 @@ public class FileBestScore {
 		while(s1.hasNext()) {
 			String name = s1.next();
 			String allScoresString = s1.nextLine();
-			int total = computeTotal(allScoresString);
-			if(total > bestScore) {
-				bestScore = total;
-				bestPlayer = name;
-			} // end if
+			try {
+				int total = computeTotal(allScoresString);
+				if (total > bestScore) {
+					bestScore = total;
+					bestPlayer = name;
+				} // end if
+			} catch (TooManyScoresException e) {
+				System.err.println("Invalided Player" + name);
+			}
 		} // end while
 		s1.close();
 		f1.close();
@@ -70,7 +81,7 @@ public class FileBestScore {
 
 	private void runApp() throws IOException {
 		Scanner s = new Scanner(System.in);
-		String filename = null;
+		String filename = "scores.txt";
 		System.out.println("What file should I load?  (e.g. scores.txt)");
 		filename = s.nextLine();
 		computeBestScore(filename);

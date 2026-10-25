@@ -48,6 +48,10 @@ public class GameComponent extends JComponent {
 			this.box.x = 0;
 		}
 	}
+
+	public void switchBoxDirection(){
+		this.dx *=-1;
+	}
 	
 	private void updateRaindrops() {
 		if (Math.random() < 0.5) {
@@ -59,7 +63,7 @@ public class GameComponent extends JComponent {
 		//	this.raindrops.add(new Raindrop(this.getWidth()));
 		//}
 		
-		// List<Raindrop> raindropsToRemove = new ArrayList<>();
+		 List<Raindrop> raindropsToRemove = new ArrayList<>();
 		
 		// Any drops that fall off the bottom of the 
 		// screen should be removed. Removing within the foreach
@@ -68,18 +72,18 @@ public class GameComponent extends JComponent {
 		// or use an iterator,
 		// or use an indexed loop and iterate backwards.
 		for (Raindrop drop : this.raindrops) {
-			boolean shouldRemove = drop.fall(this.getHeight());
+			boolean shouldRemove = drop.fall(this.getHeight()) || drop.isCollidingWith(this.box);
 			
-			//TODO include this code when ready to
-			//if (shouldRemove ) {
-			//	this.raindrops.remove(drop);
-			//}
+			//DONE include this code when ready to
+			if (shouldRemove ) {
+				raindropsToRemove.add(drop);
+			}
 		}
 
-// We'll uncomment this once we see why this approach it is needed.
-//		for (Raindrop drop : raindropsToRemove) {
-//			this.raindrops.remove(drop);
-//		}
+ //We'll uncomment this once we see why this approach it is needed.
+		for (Raindrop drop : raindropsToRemove) {
+			this.raindrops.remove(drop);
+		}
 	}
 	
 	@Override
@@ -87,7 +91,10 @@ public class GameComponent extends JComponent {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.fill(this.box);
-		// TODO: Draw raindrops
-
+		// DONE: Draw raindrops
+		for (Raindrop drop : this.raindrops){
+			drop.drawOn(g2);
+		}
 	}
+
 }

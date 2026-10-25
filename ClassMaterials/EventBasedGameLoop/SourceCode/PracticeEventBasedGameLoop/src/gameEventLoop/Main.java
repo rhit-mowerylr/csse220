@@ -18,10 +18,10 @@ import javax.swing.Timer;
  * 3. The component draws the current game state.
  * 
  * In this exercise, we develop each of these ideas.
- * TODO: Replace the loop with button input to advance one tick.
- * TODO: Replace the button with a timer.
- * TODO: Make the button change the direction of motion.
- * TODO: Add falling raindrops.
+ * DONE: Replace the loop with button input to advance one tick.
+ * DONE: Replace the button with a timer.
+ * DONE: Make the button change the direction of motion.
+ * DONE: Add falling raindrops.
  * TODO: Make the box "catch" drops that hit it.
  * 
  * @author Matt Boutell, Mark Hays, Jason Yoder, Buffalo Hewner,
@@ -30,7 +30,7 @@ import javax.swing.Timer;
  */
 public class Main {
 
-	public static final int DELAY=50;
+	public static final int DELAY_MS=50;
 	
 	public static void main(String[] args) {
 		new Main();
@@ -44,17 +44,30 @@ public class Main {
 		frame.add(component, BorderLayout.CENTER);
 	
 		JButton button = new JButton("Click me");
+
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				component.switchBoxDirection();
+			}
+		});
+
 		frame.add(button, BorderLayout.SOUTH);
 		GameAdvanceListener advanceListener = new GameAdvanceListener(component);
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		while (true) {
-			advanceListener.advanceOneTick();
+
+		Timer timer = new Timer(DELAY_MS, advanceListener);
+		timer.start();
+
+		//while (true) {
+		//	advanceListener.advanceOneTick();
 			// 1. How do we slow this down?
-			
-		}
+	//		for (int i=0; i<10000000; i++){
+	//			double y=Math.log(Math.pow(10, i));
+	//		}
+		//}
 		
 	}
 }

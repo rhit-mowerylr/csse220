@@ -32,5 +32,9 @@ public class Raindrop {
 		g.fill(drop);
 		g.setColor(Color.BLACK);
 	}
+
+	public boolean isCollidingWith(Rectangle2D.Double box) {
+		return box.intersects(x,y, SIZE, SIZE);
+	}
 		
 }

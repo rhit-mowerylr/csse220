@@ -1,4 +1,8 @@
 package fileIO;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  * Class: LevelIO
@@ -44,9 +48,34 @@ Title: Sample arcade game level: a 20 x 20 field of play not counting boundaries
 |--------------------|
 
 	 ***************************************************************************/
-	
-	
-	
+	public void writeFile(String filename){
+		boolean foundFile=false;
+		String fileToRead=filename;
+
+		while (!foundFile) {
+			try {
+				PrintWriter out = new PrintWriter(fileToRead);
+				foundFile=true;
+				out.println("|--------------------|");
+				out.println("|....................|");
+				out.println("|..------............|");
+				out.println("|.............----...|");
+
+				out.close();
+			} catch (FileNotFoundException e) {
+				System.err.println(e.getMessage());
+
+				//Option 1: User gives correct filename in console
+				Scanner in = new Scanner(System.in);
+				System.out.print("Enter corrected filename:");
+				fileToRead = in.nextLine().trim();
+				System.out.println(fileToRead);
+
+				//Option 2: User gives correct filename via JFileChooser
+			}
+		}
+	}
+
 	/*************************************************************************** 
 		For the readFile method
 		
@@ -57,7 +86,21 @@ Title: Sample arcade game level: a 20 x 20 field of play not counting boundaries
 	 ***************************************************************************/
 
 
-	
+	private void readFile(String filename){
+		File file = new File(filename);
+		try {
+			Scanner in = new Scanner(file);  //Not new Scanner(System.in);
+			while (in.hasNextLine()){
+				String currentLine= in.nextLine();
+				System.out.println(currentLine);
+			}
+
+			in.close();
+
+		} catch (FileNotFoundException e){
+			throw new RuntimeException(e);
+		}
+	}
 	//-----------------------------------------------------------------------------------
 	
 	/**
@@ -71,8 +114,8 @@ Title: Sample arcade game level: a 20 x 20 field of play not counting boundaries
 		// TODO #2 Have Eclipse generate the stubs for these two methods
 		// TODO #3 Implement both writeFile and readFile methods - read instructions above
 		
-		// writeFile(filename);
-		// readFile(filename);
+		 writeFile(filename);
+		 readFile(filename);
 	} // runApp
 
 	//-----------------------------------------------------------------------------------

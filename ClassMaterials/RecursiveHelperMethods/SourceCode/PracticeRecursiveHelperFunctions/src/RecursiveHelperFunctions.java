@@ -19,14 +19,18 @@ public class RecursiveHelperFunctions {
 	 * Examples:
 	 * For array {1,2,3,4}
 	 * sumWholeArray(array) returns 10
-	 * 
+	 *
 	 * @param array
 	 * @return sum of array
 	 */
 	public static int sumWholeArray(int[] array) {
-		return 0;
+		if (array==null || array.length == 0){
+			return 0;
+		}
+
+		return sumArray(0, array.length-1, array);
 	}
-	
+
 	
 	/**
 	 * 
@@ -49,8 +53,16 @@ public class RecursiveHelperFunctions {
 	 * @return sum of elements
 	 */
 	public static int sumArray(int fromIndex, int toIndex, int[] array) {
-		return 0;
+
+		if (fromIndex==toIndex) {
+			return array[fromIndex];
+		}
+
+		int first=array[fromIndex];
+		return first+sumArray(fromIndex+1, toIndex, array);
+
 	}
+
 	
 	/**
 	 * Returns true if the array is in increasing order
@@ -67,7 +79,22 @@ public class RecursiveHelperFunctions {
 	 * @return true if list is sorted in increasing order
 	 */
 	public static boolean isOrdered(int[] array) {
-		return false;
+		if (array.length<=1) {
+			return true;
+		}
+
+		return isNewOrdered(0, array.length-1, array);
+	}
+	public static boolean isNewOrdered(int fromIndex, int toIndex, int[] array) {
+
+		if (fromIndex==toIndex) {
+			return true;
+		}
+		if (fromIndex==toIndex-1){
+			return (array[fromIndex] <array[fromIndex+1]);
+
+		}
+		return (array[fromIndex] < array[fromIndex + 1] && isNewOrdered(fromIndex+1, toIndex, array));
 	}
 	
 	/**
@@ -88,7 +115,22 @@ public class RecursiveHelperFunctions {
 	 * @return true if there is one uppercase character
 	 */
 	public static boolean hasExactlyOneUppercase(String input) {
-		return false;
+		if(input.length()==0){
+			return false;
+		}
+		return CountUppercase(input)==1;
+	}
+
+	public static int CountUppercase( String newinput) {
+		if(newinput==null|| newinput.isEmpty()){
+			return 0;
+		}
+		int uppercases=0;
+		char first=newinput.charAt(0);
+		if(Character.isUpperCase(first)){
+			uppercases+=1;
+		}
+		return uppercases + CountUppercase(newinput.substring(1));
 	}
 
 	/**
@@ -105,8 +147,23 @@ public class RecursiveHelperFunctions {
 	 * @return length of chain
 	 */
 	public static int longestChainLength(String input) {
-		return 0;
+		if(input.length()==0){
+			return 0;
+		}
+		return longestChainWithLetter(input.charAt(0), 1, input.substring(1));
 	}
+	public static int longestChainWithLetter(char currentLetter, int currentChain, String input) {
+		if(input.isEmpty())
+			return currentChain;
+		if(input.charAt(0) == currentLetter) {
+			return longestChainWithLetter(currentLetter, currentChain + 1, input.substring(1));
+		} else {
+			int otherChain = longestChainWithLetter(input.charAt(0), 1, input.substring(1));
+			return Math.max(currentChain, otherChain);
+		}
+	}
+
+
 
 
 
